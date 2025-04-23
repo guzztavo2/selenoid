@@ -11,8 +11,8 @@ Este projeto demonstra como instalar e configurar o **Selenoid**, um “hub” d
 
 ## 1. Pré-requisitos
 
-- **Docker** instalado (Engine ≥ 20.x) citeturn0search6  
-- **Docker-Compose** instalado (versão 1.29+ ou Compose V2) citeturn0search8  
+- **Docker** instalado (Engine ≥ 20.x) 
+- **Docker-Compose** instalado (versão 1.29+ ou Compose V2)
 
 ---
 
@@ -23,7 +23,7 @@ Para isolar o tráfego entre Selenoid e os containers de browser, criamos uma _u
 ```bash
 docker network create selenoid-net
 ```
-- `selenoid-net` é o nome lógico da rede. citeturn1search1  
+- `selenoid-net` é o nome lógico da rede.
 - Isso garante que todos os containers conectados troquem dados diretamente, sem expor portas extras.  
 
 ---
