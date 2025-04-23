@@ -166,7 +166,7 @@ Controla sessões, limites e bind-mounts:
 
 - **volumes**: monta configurações e logs.  
 - **ports**: publica API WebDriver (4444) e UI (8080).  
-- **network_mode** ou **networks**: garante comunicação interna citeturn1search1.  
+- **network_mode** ou **networks**: garante comunicação interna.  
 
 ---
 
