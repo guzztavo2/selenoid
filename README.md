@@ -165,7 +165,7 @@ Define quais navegadores e versões o Selenoid deve usar. Exemplo mínimo:
 Controla sessões, limites e bind-mounts:
 
 - **volumes**: monta configurações e logs.  
-- **ports**: publica API WebDriver (4444) e UI (8080).  
+- **ports**: publica API WebDriver (4444), VNC(5900) e UI (8080).  
 - **network_mode** ou **networks**: garante comunicação interna citeturn1search1.  
 
 ---
@@ -177,3 +177,32 @@ Controla sessões, limites e bind-mounts:
 - Habilitar VNC ou gravação de vídeo (`enableVideo`) permite revisitar o que ocorreu na sessão.  
 
 Este setup demonstra como integrar Docker, Docker-Compose, CM e Selenoid para criar um ambiente robusto de automação de testes em massa.
+
+
+## 8 - Inicialização de Script
+
+- O selenoid possui configurações especificas na hora de iniciar o driver do Selenium. Então é interessante adicionar os seguintes padrões na hora de iniciar seu teste/robô:
+
+```
+options = webdriver.ChromeOptions()
+options.add_argument("--disable-extensions")
+options.add_argument("--disable-gpu")
+options.add_argument("--no-sandbox")
+options.add_argument("-disable-quic")
+options.add_argument('-ignore-ssl-errors=yes')
+options.add_argument('-ignore-certificate-errors')
+options.add_argument("--disable-blink-features=AutomationControlled")
+options.add_argument("--disable-popup-blocking")
+options.add_argument("--disable-infobars")
+options.add_experimental_option("excludeSwitches", ["enable-automation"])
+options.add_experimental_option('useAutomationExtension', False)
+options.add_argument('--no-sandbox')
+options.add_argument('--disable-dev-shm-usage')
+options.set_capability('browserVersion', '128.0')
+options.set_capability('selenoid:options', {
+    'enableVNC': True,
+    'enableVideo': False,
+    'name': f'TESTE_TEST_{int(time.time())}'
+})
+driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
+```
